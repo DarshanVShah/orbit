@@ -5,11 +5,13 @@ const navLinks = document.querySelector('.nav-links');
 const hero = document.querySelector('.hero');
 const mediaBadge = document.querySelector('.media-badge');
 const ctaConfirmation = document.querySelector('.cta-confirmation');
-const arButton = document.querySelector('.ar-button');
+const heroViewer = document.getElementById('orbitModel');
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 const setScrollAccent = () => {
+  if (!hero) return;
+
   const rect = hero.getBoundingClientRect();
   const progress = clamp(1 - rect.top / window.innerHeight, 0, 1);
   const opacity = (0.14 + progress * 0.18).toFixed(3);
@@ -55,22 +57,23 @@ const setDynamicYear = () => {
   }
 };
 
-const configureARBadge = () => {
-  if (!mediaBadge || !arButton) return;
+const configureExperienceNote = () => {
+  if (!mediaBadge) return;
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  if (isIOS) {
-    mediaBadge.textContent = 'Tap View in AR on iPhone or iPad';
+  const ua = navigator.userAgent.toLowerCase();
+  if (/iphone|ipad|ipod/.test(ua)) {
+    mediaBadge.textContent = 'Tap “AR” to place Orbit in your space';
+  } else if (/android/.test(ua)) {
+    mediaBadge.textContent = 'Tap “AR” to view Orbit in your room';
   } else {
-    mediaBadge.textContent = 'Download the USDZ file to preview on Apple devices';
-    arButton.setAttribute('download', 'Orbit.usdz');
+    mediaBadge.textContent = 'Drag to orbit. Scan on mobile for AR mode';
   }
 };
 
 const init = () => {
   setDynamicYear();
   setScrollAccent();
-  configureARBadge();
+  configureExperienceNote();
 
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', toggleNavigation);

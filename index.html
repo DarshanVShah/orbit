@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Orbit | The One-Handed CAD Keyboard</title>
+    <title>Orbit</title>
     <meta
       name="description"
       content="Orbit is a precision-engineered, one-handed keyboard that streamlines CAD workflows with instant access to essential shortcuts."
     />
+    <link rel="icon" type="image/png" href="assets/Light.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,6 +18,10 @@
     <link rel="preload" href="assets/Dark.png" as="image" />
     <link rel="preload" href="assets/Light.png" as="image" />
     <link rel="stylesheet" href="styles.css" />
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
+    ></script>
   </head>
   <body>
     <header class="site-header">
@@ -53,20 +58,26 @@
             </div>
           </div>
           <div class="hero-media">
-            <div class="media-frame" id="orbit-preview">
-              <picture class="hero-visual">
-                <source srcset="assets/Dark.png" media="(prefers-color-scheme: dark)" />
-                <img
-                  src="assets/Light.png"
-                  alt="Orbit one-handed CAD keyboard"
-                  loading="lazy"
-                />
-              </picture>
-              <a class="btn btn-light ar-button" rel="ar" href="assets/KeyCad.usdz">
-                <span>View in AR</span>
-              </a>
-              <div class="media-badge">Open on iPhone or iPad to view in AR</div>
-            </div>
+            <model-viewer
+              id="orbitModel"
+              class="hero-model"
+              src="assets/keycad.glb"
+              ios-src="assets/KeyCad.usdz"
+              alt="Orbit one-handed CAD keyboard"
+              shadow-intensity="0.7"
+              camera-controls
+              auto-rotate
+              ar
+              ar-modes="quick-look webxr scene-viewer"
+              ar-scale="auto"
+              poster="assets/Light.png"
+              exposure="0.9"
+              environment-image="neutral"
+              touch-action="pan-y"
+            >
+              <div class="model-loading" slot="poster">Loading Orbit…</div>
+            </model-viewer>
+            <div class="media-badge">Use camera controls or launch AR to explore Orbit</div>
           </div>
         </div>
       </section>
@@ -106,7 +117,25 @@
 
       <section class="design" id="design">
         <div class="container design-content">
-          <div class="design-media" aria-hidden="true"></div>
+          <div class="design-media" aria-hidden="false">
+            <model-viewer
+              class="design-model"
+              src="assets/keycad.glb"
+              ios-src="assets/KeyCad.usdz"
+              alt="Orbit keyboard floating with soft lighting"
+              camera-controls
+              auto-rotate
+              disable-zoom
+              shadow-intensity="0.4"
+              environment-image="neutral"
+              camera-orbit="-10deg 75deg 120%"
+              min-camera-orbit="auto 45deg auto"
+              max-camera-orbit="auto 90deg auto"
+              exposure="0.9"
+            >
+              <div class="model-loading" slot="poster">Previewing Orbit…</div>
+            </model-viewer>
+          </div>
           <div class="design-copy">
             <h2>Design that disappears.</h2>
             <p>

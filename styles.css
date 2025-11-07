@@ -223,52 +223,83 @@ canvas {
   opacity: 1;
 }
 
-.media-frame {
+.hero-media {
   position: relative;
-  overflow: hidden;
+}
+
+.hero-model {
+  width: 100%;
+  min-height: 420px;
   border-radius: var(--radius-lg);
+  border: 1px solid var(--outline);
   background: linear-gradient(
     160deg,
     rgba(10, 132, 255, var(--hero-glow-opacity)),
     rgba(10, 132, 255, 0)
   );
-  min-height: 420px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--outline);
+  overflow: hidden;
+  box-shadow: 0 32px 80px -48px rgba(11, 11, 15, 0.55);
 }
 
-.hero-visual {
-  position: relative;
+model-viewer {
+  display: block;
   width: 100%;
   height: 100%;
+  background: transparent;
+  border-radius: inherit;
 }
 
-.hero-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+model-viewer::part(default-ar-button) {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text);
+  box-shadow: 0 18px 36px -18px rgba(11, 11, 15, 0.45);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.ar-button {
-  position: absolute;
-  left: 24px;
-  bottom: 24px;
-  font-size: 0.92rem;
+model-viewer::part(default-ar-button):hover,
+model-viewer::part(default-ar-button):focus {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 1);
+}
+
+model-viewer::part(default-progress-bar) {
+  color: rgba(10, 132, 255, 0.85);
+  height: 3px;
+}
+
+.model-loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--text);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .media-badge {
   position: absolute;
-  top: 24px;
-  right: 24px;
-  background: rgba(255, 255, 255, 0.7);
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(18px);
-  padding: 10px 16px;
+  padding: 10px 18px;
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
+  pointer-events: none;
 }
 
 .strip {
@@ -336,10 +367,17 @@ canvas {
 .design-media {
   height: 520px;
   border-radius: var(--radius-lg);
-  background: radial-gradient(circle at 20% 20%, rgba(10, 132, 255, 0.4), transparent 55%),
-    radial-gradient(circle at 80% 60%, rgba(10, 132, 255, 0.15), transparent 70%),
-    linear-gradient(160deg, rgba(11, 11, 15, 0.9), rgba(11, 11, 15, 0.7));
+  background: radial-gradient(circle at 20% 20%, rgba(10, 132, 255, 0.35), transparent 55%),
+    radial-gradient(circle at 80% 60%, rgba(10, 132, 255, 0.18), transparent 70%),
+    linear-gradient(170deg, rgba(11, 11, 15, 0.92), rgba(11, 11, 15, 0.7));
   box-shadow: inset 0 0 60px -20px rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  position: relative;
+}
+
+.design-model {
+  width: 100%;
+  height: 100%;
 }
 
 .design h2 {
@@ -491,16 +529,10 @@ canvas {
   }
 
   .media-badge {
-    right: 16px;
-    left: 16px;
-    top: 16px;
-    text-align: center;
-  }
-
-  .ar-button {
     left: 50%;
-    bottom: 24px;
-    transform: translateX(-50%);
+    bottom: 16px;
+    width: calc(100% - 64px);
+    text-align: center;
   }
 
   .design-content {
@@ -581,7 +613,7 @@ canvas {
     padding-top: 100px;
   }
 
-  .media-frame {
+  .hero-model {
     min-height: 320px;
   }
 
