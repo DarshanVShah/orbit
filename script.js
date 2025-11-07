@@ -89,8 +89,17 @@ const updateCursorGlow = (event) => {
   const point = getEventPoint(event);
   if (!point) return;
 
-  root.style.setProperty('--cursor-glow-x', `${point.clientX}px`);
-  root.style.setProperty('--cursor-glow-y', `${point.clientY}px`);
+  const x = point.clientX;
+  const y = point.clientY;
+
+  const currentX = parseFloat(root.style.getPropertyValue('--cursor-glow-x')) || x;
+  const currentY = parseFloat(root.style.getPropertyValue('--cursor-glow-y')) || y;
+
+  const easedX = currentX + (x - currentX) * 0.2;
+  const easedY = currentY + (y - currentY) * 0.2;
+
+  root.style.setProperty('--cursor-glow-x', `${easedX}px`);
+  root.style.setProperty('--cursor-glow-y', `${easedY}px`);
   root.style.setProperty('--cursor-glow-opacity', '1');
 };
 
