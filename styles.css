@@ -179,11 +179,21 @@ canvas {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
+  border: none;
   padding: 14px 28px;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-decoration: none;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid rgba(10, 132, 255, 0.6);
+  outline-offset: 3px;
 }
 
 .btn-small {
@@ -366,6 +376,65 @@ model-viewer::part(default-progress-bar) {
   margin: 0;
   color: var(--muted);
   line-height: 1.6;
+}
+
+.demo {
+  padding: 140px 0;
+}
+
+.demo-content {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+}
+
+.demo-media {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.demo-viewer {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  padding: 16px;
+  background: radial-gradient(circle at 20% 20%, rgba(10, 132, 255, 0.25), transparent 60%),
+    radial-gradient(circle at 80% 50%, rgba(10, 132, 255, 0.18), transparent 70%),
+    linear-gradient(155deg, rgba(13, 16, 24, 0.92), rgba(13, 16, 24, 0.8));
+  box-shadow: 0 26px 70px -48px rgba(11, 11, 15, 0.55);
+  width: 100%;
+  max-width: 380px;
+}
+
+.demo-viewer::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border-radius: calc(var(--radius-md) - 12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.demo-video {
+  width: 100%;
+  display: block;
+  border-radius: calc(var(--radius-md) - 18px);
+  box-shadow: 0 16px 48px -36px rgba(0, 0, 0, 0.55);
+}
+
+.demo-copy {
+  max-width: 560px;
+}
+
+.demo-copy h2 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  margin-bottom: 20px;
+}
+
+.demo-copy p {
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 .design {
@@ -762,6 +831,21 @@ model-viewer::part(default-progress-bar) {
     gap: 28px;
   }
 
+  .demo-content {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .demo-media {
+    justify-content: center;
+  }
+
+  .demo-copy {
+    max-width: 640px;
+  }
+
   .story-content {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -860,6 +944,22 @@ model-viewer::part(default-progress-bar) {
 
   .team-card {
     padding: 32px 28px;
+  }
+
+  .demo {
+    padding: 120px 0;
+  }
+
+  .demo-viewer {
+    max-width: 420px;
+  }
+
+  .demo {
+    padding: 100px 0;
+  }
+
+  .demo-viewer {
+    padding: 12px;
   }
 
   .story {
