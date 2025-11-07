@@ -53,6 +53,11 @@ const handleFormSubmit = async (event) => {
 
   if (!email) return;
 
+  const hiddenMessage = form.querySelector('#preorderMessage');
+  if (hiddenMessage) {
+    hiddenMessage.value = `Preorder request from ${email}`;
+  }
+
   const formData = new FormData(form);
 
   try {
