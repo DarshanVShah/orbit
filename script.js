@@ -46,18 +46,40 @@ const closeNavigationOnLink = (event) => {
   }
 };
 
-const handleFormSubmit = (event) => {
+const handleFormSubmit = async (event) => {
   event.preventDefault();
-  const email = event.target.email.value.trim();
+  const form = event.target;
+  const email = form.email.value.trim();
 
   if (!email) return;
 
-  if (ctaConfirmation) {
-    ctaConfirmation.hidden = false;
-    ctaConfirmation.textContent = 'Thanks for joining the waitlist. We will be in touch soon.';
-  }
+  const formData = new FormData(form);
 
-  event.target.reset();
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      headers: {
+        Accept: 'application/json',
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Form submission failed');
+    }
+
+    if (ctaConfirmation) {
+      ctaConfirmation.hidden = false;
+      ctaConfirmation.textContent = 'Thanks for joining the waitlist. We will be in touch soon.';
+    }
+
+    form.reset();
+  } catch (error) {
+    if (ctaConfirmation) {
+      ctaConfirmation.hidden = false;
+      ctaConfirmation.textContent = 'We could not submit your request. Please try again in a moment.';
+    }
+  }
 };
 
 const setDynamicYear = () => {
