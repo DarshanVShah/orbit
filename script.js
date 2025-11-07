@@ -5,9 +5,20 @@ const navLinks = document.querySelector('.nav-links');
 const hero = document.querySelector('.hero');
 const mediaBadge = document.querySelector('.media-badge');
 const ctaConfirmation = document.querySelector('.cta-confirmation');
-const heroViewer = document.getElementById('orbitModel');
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+const getEventPoint = (event) => {
+  if (event.touches && event.touches.length) {
+    return event.touches[0];
+  }
+
+  if (event.changedTouches && event.changedTouches.length) {
+    return event.changedTouches[0];
+  }
+
+  return event;
+};
 
 const setScrollAccent = () => {
   if (!hero) return;
@@ -70,10 +81,38 @@ const configureExperienceNote = () => {
   }
 };
 
+const hideCursorGlow = () => {
+  root.style.setProperty('--cursor-glow-opacity', '0');
+};
+
+const updateCursorGlow = (event) => {
+  const point = getEventPoint(event);
+  if (!point) return;
+
+  root.style.setProperty('--cursor-glow-x', `${point.clientX}px`);
+  root.style.setProperty('--cursor-glow-y', `${point.clientY}px`);
+  root.style.setProperty('--cursor-glow-opacity', '1');
+};
+
+const handlePointerOut = (event) => {
+  if (!event.relatedTarget) {
+    hideCursorGlow();
+  }
+};
+
 const init = () => {
   setDynamicYear();
   setScrollAccent();
   configureExperienceNote();
+
+  hideCursorGlow();
+
+  document.addEventListener('pointermove', updateCursorGlow);
+  document.addEventListener('mousemove', updateCursorGlow);
+  document.addEventListener('pointerleave', hideCursorGlow);
+  document.addEventListener('mouseleave', hideCursorGlow);
+  document.addEventListener('pointerout', handlePointerOut);
+  window.addEventListener('blur', hideCursorGlow);
 
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', toggleNavigation);
