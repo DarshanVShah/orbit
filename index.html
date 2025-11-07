@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Orbit | The One-Handed CAD Keyboard</title>
+    <meta
+      name="description"
+      content="Orbit is a precision-engineered, one-handed keyboard that streamlines CAD workflows with instant access to essential shortcuts."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" href="assets/Dark.png" as="image" />
+    <link rel="preload" href="assets/Light.png" as="image" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="logo" href="#hero" aria-label="Orbit home">
+          <img src="assets/Light.png" alt="Orbit" class="logo-image" />
+        </a>
+        <nav class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#design">Design</a>
+          <a href="#tech">Tech Specs</a>
+          <a href="#store" class="btn btn-small">Preorder</a>
+        </nav>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="container hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">New</p>
+            <h1>Orbit</h1>
+            <p class="hero-description">
+              The one-handed keyboard engineered for CAD professionals. Orbit keeps your
+              most-used commands within reach so you can design without breaking flow.
+            </p>
+            <div class="hero-actions">
+              <a href="#store" class="btn btn-primary">Preorder now</a>
+              <a href="#design" class="btn btn-text">Watch the story</a>
+            </div>
+          </div>
+          <div class="hero-media">
+            <div class="media-frame" id="orbit-preview">
+              <picture class="hero-visual">
+                <source srcset="assets/Dark.png" media="(prefers-color-scheme: dark)" />
+                <img
+                  src="assets/Light.png"
+                  alt="Orbit one-handed CAD keyboard"
+                  loading="lazy"
+                />
+              </picture>
+              <a class="btn btn-light ar-button" rel="ar" href="assets/KeyCad.usdz">
+                <span>View in AR</span>
+              </a>
+              <div class="media-badge">Open on iPhone or iPad to view in AR</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="strip">
+        <div class="container strip-content">
+          <p>Precision engineered. Crafted to accelerate every move.</p>
+        </div>
+      </section>
+
+      <section class="features" id="features">
+        <div class="container">
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h3>Command in reach</h3>
+              <p>
+                Orbit compresses hundreds of shortcuts into an intuitive layout. Assign macros,
+                cycle tools, and navigate views with minimal movement.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Built for endurance</h3>
+              <p>
+                CNC-machined aluminum chassis with tactile optical switches make Orbit a durable
+                companion for long CAD sessions.
+              </p>
+            </article>
+            <article class="feature-card">
+              <h3>Context-aware lighting</h3>
+              <p>
+                Adaptive backlighting guides your workflow. Match color profiles to popular CAD suites or your custom profiles.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="design" id="design">
+        <div class="container design-content">
+          <div class="design-media" aria-hidden="true"></div>
+          <div class="design-copy">
+            <h2>Design that disappears.</h2>
+            <p>
+              Orbit is sculpted to nestle under your palm, freeing your dominant hand for precision control.
+              Every keycap is angled for effortless reach, while the slip-resistant base anchors Orbit wherever you work.
+            </p>
+            <p>
+              Pair Orbit with the app to map shortcuts by project and share profiles across your team.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="tech" id="tech">
+        <div class="container">
+          <h2>Tech Specs</h2>
+          <div class="spec-grid">
+            <div class="spec">
+              <h4>Materials</h4>
+              <p>6000-series aluminum, PBT keycaps, silicone base</p>
+            </div>
+            <div class="spec">
+              <h4>Switches</h4>
+              <p>Optical low-travel switches rated for 70M actuations</p>
+            </div>
+            <div class="spec">
+              <h4>Connectivity</h4>
+              <p>USB-C, Bluetooth 5.3 with multi-device pairing</p>
+            </div>
+            <div class="spec">
+              <h4>Software</h4>
+              <p>Orbit Studio for macOS & Windows; API for custom integrations</p>
+            </div>
+            <div class="spec">
+              <h4>Dimensions</h4>
+              <p>143 × 96 × 24 mm · 420 g</p>
+            </div>
+            <div class="spec">
+              <h4>Battery</h4>
+              <p>Li-ion 2800 mAh · Up to 40 hours with adaptive lighting</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="store">
+        <div class="container cta-content">
+          <h2>Focus on the work. Orbit keeps pace.</h2>
+          <p>
+            Reserve your Orbit today and be among the first to experience the fastest way to CAD.
+          </p>
+          <form class="cta-form">
+            <label for="email" class="sr-only">Email address</label>
+            <input type="email" id="email" name="email" placeholder="Email" required />
+            <button type="submit" class="btn btn-primary">Notify me</button>
+          </form>
+          <p class="cta-confirmation" hidden></p>
+          <p class="cta-note">Shipping spring 2026 · Limited first production run</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div class="footer-brand">
+          <a class="logo" href="#hero" aria-label="Orbit home">
+            <img src="assets/Dark.png" alt="Orbit" class="logo-image" />
+          </a>
+          <p>Orbit is engineered by designers, for designers.</p>
+        </div>
+        <nav class="footer-links">
+          <a href="#features">Features</a>
+          <a href="#design">Design</a>
+          <a href="#tech">Tech Specs</a>
+          <a href="#store">Preorder</a>
+        </nav>
+        <div class="footer-meta">
+          <p>&copy; <span id="copyrightYear"></span> Orbit Labs</p>
+          <p><a href="mailto:hello@orbit.design">hello@orbit.design</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
+
