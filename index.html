@@ -24,7 +24,7 @@
     ></script>
   </head>
   <body>
-    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="cursor-blob" aria-hidden="true"></div>
     <header class="site-header">
       <div class="container">
         <a class="logo" href="#hero" aria-label="Orbit home">
@@ -224,23 +224,24 @@
 
       <section class="story" id="story">
         <div class="container story-content">
-          <div class="story-header">
+          <div class="story-media">
+            <div class="story-viewer">
+              <video controls preload="metadata" class="story-video">
+                <source src="assets/final.mov" type="video/quicktime" />
+                <source src="assets/final.mov" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="story-copy">
             <p class="eyebrow">Orbit Film</p>
             <h2>Step inside the Orbit workflow.</h2>
             <p>
               Watch the short film to see how Orbit compresses complex CAD moves into a single, fluid motion. Shot on location with designers who build the future every day.
             </p>
-          </div>
-          <div class="story-viewer">
-            <video
-              controls
-              preload="metadata"
-              class="story-video"
-            >
-              <source src="assets/final.mov" type="video/quicktime" />
-              <source src="assets/final.mov" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <p>
+              From the first key press to final render, Orbit keeps your hand free to sculpt. Meet the designers who helped us tune every curve and macro for speed, focus, and flow.
+            </p>
           </div>
         </div>
       </section>

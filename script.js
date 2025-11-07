@@ -5,6 +5,7 @@ const navLinks = document.querySelector('.nav-links');
 const hero = document.querySelector('.hero');
 const mediaBadge = document.querySelector('.media-badge');
 const ctaConfirmation = document.querySelector('.cta-confirmation');
+const cursorBlob = document.querySelector('.cursor-blob');
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -81,31 +82,20 @@ const configureExperienceNote = () => {
   }
 };
 
-const hideCursorGlow = () => {
-  root.style.setProperty('--cursor-glow-opacity', '0');
-};
-
 const updateCursorGlow = (event) => {
   const point = getEventPoint(event);
   if (!point) return;
 
   const x = point.clientX;
   const y = point.clientY;
+  if (!cursorBlob) return;
 
-  const currentX = parseFloat(root.style.getPropertyValue('--cursor-glow-x')) || x;
-  const currentY = parseFloat(root.style.getPropertyValue('--cursor-glow-y')) || y;
-
-  const easedX = currentX + (x - currentX) * 0.2;
-  const easedY = currentY + (y - currentY) * 0.2;
-
-  root.style.setProperty('--cursor-glow-x', `${easedX}px`);
-  root.style.setProperty('--cursor-glow-y', `${easedY}px`);
-  root.style.setProperty('--cursor-glow-opacity', '1');
+  cursorBlob.style.transform = `translate(${x - 100}px, ${y - 100}px)`;
 };
 
 const handlePointerOut = (event) => {
-  if (!event.relatedTarget) {
-    hideCursorGlow();
+  if (!event.relatedTarget && cursorBlob) {
+    cursorBlob.style.transform = `translate(-200px, -200px)`;
   }
 };
 
@@ -114,14 +104,14 @@ const init = () => {
   setScrollAccent();
   configureExperienceNote();
 
-  hideCursorGlow();
-
   document.addEventListener('pointermove', updateCursorGlow);
   document.addEventListener('mousemove', updateCursorGlow);
-  document.addEventListener('pointerleave', hideCursorGlow);
-  document.addEventListener('mouseleave', hideCursorGlow);
   document.addEventListener('pointerout', handlePointerOut);
-  window.addEventListener('blur', hideCursorGlow);
+  window.addEventListener('blur', () => {
+    if (cursorBlob) {
+      cursorBlob.style.transform = `translate(-200px, -200px)`;
+    }
+  });
 
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', toggleNavigation);
