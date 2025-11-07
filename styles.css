@@ -27,6 +27,7 @@ body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   position: relative;
+  cursor: default;
 }
 .cursor-blob {
   position: fixed;
