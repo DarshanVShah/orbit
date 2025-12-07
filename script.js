@@ -3,6 +3,7 @@ const body = document.body;
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 const hero = document.querySelector('.hero');
+const mediaBadge = document.querySelector('.media-badge');
 const ctaConfirmation = document.querySelector('.cta-confirmation');
 const cursorBlob = document.querySelector('.cursor-blob');
 
@@ -95,6 +96,18 @@ const setDynamicYear = () => {
   }
 };
 
+const configureExperienceNote = () => {
+  if (!mediaBadge) return;
+
+  const ua = navigator.userAgent.toLowerCase();
+  if (/iphone|ipad|ipod/.test(ua)) {
+    mediaBadge.textContent = 'Tap “AR” to place Orbit in your space';
+  } else if (/android/.test(ua)) {
+    mediaBadge.textContent = 'Tap “AR” to view Orbit in your room';
+  } else {
+    mediaBadge.textContent = 'Drag to orbit. Scan on mobile for AR mode';
+  }
+};
 
 const updateCursorGlow = (event) => {
   const point = getEventPoint(event);
@@ -116,6 +129,7 @@ const handlePointerOut = (event) => {
 const init = () => {
   setDynamicYear();
   setScrollAccent();
+  configureExperienceNote();
 
   document.addEventListener('pointermove', updateCursorGlow);
   document.addEventListener('mousemove', updateCursorGlow);
