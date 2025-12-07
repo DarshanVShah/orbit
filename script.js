@@ -3,7 +3,6 @@ const body = document.body;
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 const hero = document.querySelector('.hero');
-const mediaBadge = document.querySelector('.media-badge');
 const ctaConfirmation = document.querySelector('.cta-confirmation');
 const cursorBlob = document.querySelector('.cursor-blob');
 
@@ -34,7 +33,9 @@ const handleScroll = () => {
   setScrollAccent();
 };
 
-const toggleNavigation = () => {
+const toggleNavigation = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
   body.classList.toggle('nav-open');
   navLinks.classList.toggle('open');
 };
@@ -96,18 +97,6 @@ const setDynamicYear = () => {
   }
 };
 
-const configureExperienceNote = () => {
-  if (!mediaBadge) return;
-
-  const ua = navigator.userAgent.toLowerCase();
-  if (/iphone|ipad|ipod/.test(ua)) {
-    mediaBadge.textContent = 'Tap “AR” to place Orbit in your space';
-  } else if (/android/.test(ua)) {
-    mediaBadge.textContent = 'Tap “AR” to view Orbit in your room';
-  } else {
-    mediaBadge.textContent = 'Drag to orbit. Scan on mobile for AR mode';
-  }
-};
 
 const updateCursorGlow = (event) => {
   const point = getEventPoint(event);
@@ -175,7 +164,6 @@ const optimizeModelViewers = () => {
 const init = () => {
   setDynamicYear();
   setScrollAccent();
-  configureExperienceNote();
   optimizeModelViewers();
 
   document.addEventListener('pointermove', updateCursorGlow);
