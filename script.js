@@ -3,6 +3,7 @@ const body = document.body;
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 const hero = document.querySelector('.hero');
+const mediaBadge = document.querySelector('.media-badge');
 const ctaConfirmation = document.querySelector('.cta-confirmation');
 const cursorBlob = document.querySelector('.cursor-blob');
 
@@ -33,9 +34,7 @@ const handleScroll = () => {
   setScrollAccent();
 };
 
-const toggleNavigation = (event) => {
-  event.preventDefault();
-  event.stopPropagation();
+const toggleNavigation = () => {
   body.classList.toggle('nav-open');
   navLinks.classList.toggle('open');
 };
@@ -97,6 +96,18 @@ const setDynamicYear = () => {
   }
 };
 
+const configureExperienceNote = () => {
+  if (!mediaBadge) return;
+
+  const ua = navigator.userAgent.toLowerCase();
+  if (/iphone|ipad|ipod/.test(ua)) {
+    mediaBadge.textContent = 'Tap “AR” to place Orbit in your space';
+  } else if (/android/.test(ua)) {
+    mediaBadge.textContent = 'Tap “AR” to view Orbit in your room';
+  } else {
+    mediaBadge.textContent = 'Drag to orbit. Scan on mobile for AR mode';
+  }
+};
 
 const updateCursorGlow = (event) => {
   const point = getEventPoint(event);
@@ -115,56 +126,10 @@ const handlePointerOut = (event) => {
   }
 };
 
-const optimizeModelViewers = () => {
-  const viewers = document.querySelectorAll('model-viewer');
-  
-  viewers.forEach((viewer) => {
-    // Ensure models load automatically
-    if (viewer.loaded === false) {
-      viewer.load();
-    }
-
-    // Handle load events for better UX
-    viewer.addEventListener('load', () => {
-      viewer.classList.add('model-loaded');
-      const loadingSlot = viewer.querySelector('[slot="poster"]');
-      if (loadingSlot) {
-        loadingSlot.style.opacity = '0';
-        setTimeout(() => {
-          loadingSlot.style.display = 'none';
-        }, 300);
-      }
-    });
-
-    // Handle progress for loading states
-    viewer.addEventListener('progress', (event) => {
-      const progress = event.detail.totalProgress;
-      if (progress === 1) {
-        viewer.classList.add('model-ready');
-      }
-    });
-
-    // Preload models that are in viewport
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !viewer.loaded) {
-            viewer.load();
-            observer.unobserve(viewer);
-          }
-        });
-      },
-      { rootMargin: '50px' }
-    );
-    
-    observer.observe(viewer);
-  });
-};
-
 const init = () => {
   setDynamicYear();
   setScrollAccent();
-  optimizeModelViewers();
+  configureExperienceNote();
 
   document.addEventListener('pointermove', updateCursorGlow);
   document.addEventListener('mousemove', updateCursorGlow);
