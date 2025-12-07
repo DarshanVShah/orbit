@@ -126,10 +126,57 @@ const handlePointerOut = (event) => {
   }
 };
 
+const optimizeModelViewers = () => {
+  const viewers = document.querySelectorAll('model-viewer');
+  
+  viewers.forEach((viewer) => {
+    // Ensure models load automatically
+    if (viewer.loaded === false) {
+      viewer.load();
+    }
+
+    // Handle load events for better UX
+    viewer.addEventListener('load', () => {
+      viewer.classList.add('model-loaded');
+      const loadingSlot = viewer.querySelector('[slot="poster"]');
+      if (loadingSlot) {
+        loadingSlot.style.opacity = '0';
+        setTimeout(() => {
+          loadingSlot.style.display = 'none';
+        }, 300);
+      }
+    });
+
+    // Handle progress for loading states
+    viewer.addEventListener('progress', (event) => {
+      const progress = event.detail.totalProgress;
+      if (progress === 1) {
+        viewer.classList.add('model-ready');
+      }
+    });
+
+    // Preload models that are in viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !viewer.loaded) {
+            viewer.load();
+            observer.unobserve(viewer);
+          }
+        });
+      },
+      { rootMargin: '50px' }
+    );
+    
+    observer.observe(viewer);
+  });
+};
+
 const init = () => {
   setDynamicYear();
   setScrollAccent();
   configureExperienceNote();
+  optimizeModelViewers();
 
   document.addEventListener('pointermove', updateCursorGlow);
   document.addEventListener('mousemove', updateCursorGlow);

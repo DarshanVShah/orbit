@@ -39,6 +39,8 @@
     />
     <link rel="preload" href="assets/Dark.png" as="image" />
     <link rel="preload" href="assets/Light.png" as="image" />
+    <link rel="preload" href="assets/orbitpad.glb" as="fetch" crossorigin="anonymous" />
+    <link rel="preload" href="assets/orbitmousev3.glb" as="fetch" crossorigin="anonymous" />
     <link rel="stylesheet" href="styles.css?v=7.0" />
     <script
       type="module"
@@ -102,6 +104,10 @@
               exposure="0.9"
               environment-image="neutral"
               touch-action="pan-y"
+              reveal="auto"
+              preload="auto"
+              loading="eager"
+              interaction-policy="allow-when-focused"
             >
               <div class="model-loading" slot="poster">Loading Orbitpad…</div>
             </model-viewer>
@@ -191,6 +197,10 @@
               min-camera-orbit="auto 45deg auto"
               max-camera-orbit="auto 90deg auto"
               exposure="0.9"
+              reveal="auto"
+              preload="auto"
+              loading="eager"
+              interaction-policy="allow-when-focused"
             >
               <div class="model-loading" slot="poster">Previewing Orbitmouse…</div>
             </model-viewer>
